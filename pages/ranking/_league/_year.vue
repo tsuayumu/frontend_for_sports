@@ -36,6 +36,16 @@
         </div>
       </div>
     </div>
+    <div class="footer-nav text-center text-muted py-sm-4 py-3 fixed-bottom">
+      <div class="row">
+        <a class="col-6 border-right" :href="left_href()">
+          ＜　チーム選択
+        </a>
+        <a class="col-6" :href="right_href()">
+          順位予想　＞
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -72,6 +82,20 @@ export default {
         }
       )
       this.is_create_ranking = false
+    },
+    right_href: function() {
+      if (this.api_data['league']['name_en'] == 'pacific') {
+        return `/ranking/central/${this.api_data['year']}`
+      } else {
+        return `/ranking/pacific/${this.api_data['year']}`
+      }
+    },
+    left_href: function() {
+      if (this.api_data['league']['name_en'] == 'pacific') {
+        return `/#home-04`
+      } else {
+        return `/#home-03`
+      }
     }
   }
 }
