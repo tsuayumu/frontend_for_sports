@@ -36,43 +36,45 @@
 
     <div class="container">
       <h5 class="text-dark bg-light my-3 p-1">投稿一覧</h5>
-      <div v-for="lineup_manage in api_data['lineup_manages']" class="row bbs-contet mb-3">
-        <section class='member white col-sm-5'>
-          <div class="back-break">
-            <table border="0" width="100%">
-              <tr style="text-align: center">
-                <td></td>
-                <td>選手名</td>
-                <td>打率</td>
-                <td>本塁打</td>
-                <td>打点</td>
-              </tr>
-              <tr v-for="(player, index) in lineup_manage['lineups']" style="text-align: center">
-                <td>{{ index + 1 }}番</td>
-                <td>{{ player['name'] }}</td>
-                <td>{{ player['average'] }}</td>
-                <td>{{ player['homerun'] }}</td>
-                <td>{{ player['rbi'] }}</td>
-              </tr>
-            </table>
-            <p class="text-center mb-0">
-              {{ lineup_manage['comment'] }}
-            </p>
-          </div>
-        </section>
-        <section class='member col-sm-7 py-1 text-dark'>
-          <div class="coment">
-            <form @submit.prevent="create_user_comment(lineup_manage['id'])" class="pt-2">
-              <input type='text' v-model="user_comment">
-              <input type='submit' value='コメント投稿'>
-            </form>
-            <div class="text-coment">
-              <p v-for="user_comment in lineup_manage['user_comments']" class="mb-1">
-                {{ user_comment }}
-              </p>
+      <div v-for="lineup_manage in api_data['lineup_manages']" class="bbs-contet mb-3">
+        <h6 class="text-center white manage-tit">
+          {{ lineup_manage['comment'] }}
+        </h6>
+        <div class="row">
+          <section class='member white col-sm-5'>
+            <div class="back-break">
+              <table border="0" width="100%">
+                <tr style="text-align: center">
+                  <td></td>
+                  <td>選手名</td>
+                  <td>打率</td>
+                  <td>本塁打</td>
+                  <td>打点</td>
+                </tr>
+                <tr v-for="(player, index) in lineup_manage['lineups']" style="text-align: center">
+                  <td>{{ index + 1 }}番</td>
+                  <td>{{ player['name'] }}</td>
+                  <td>{{ player['average'] }}</td>
+                  <td>{{ player['homerun'] }}</td>
+                  <td>{{ player['rbi'] }}</td>
+                </tr>
+              </table>
             </div>
-          </div>
-        </section>
+          </section>
+          <section class='member col-sm-7 py-1 text-dark'>
+            <div class="coment">
+              <form @submit.prevent="create_user_comment(lineup_manage['id'])" class="py-2">
+                <input type='text' v-model="user_comment">
+                <input class="btn btn-light comment-btn" type="submit" value="投稿">
+              </form>
+              <div class="text-coment">
+                <p v-for="user_comment in lineup_manage['user_comments']" class="mb-1">
+                  {{ user_comment }}
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
     <div class="footer-nav text-center text-muted py-sm-4 py-3 fixed-bottom">

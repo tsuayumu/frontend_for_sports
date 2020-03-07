@@ -45,52 +45,54 @@
 
     <div class="container">
       <h5 class="text-dark bg-light my-3 p-1">投稿一覧</h5>
-      <div v-for="rotation_manage in api_data['rotation_manages']" class="row bbs-contet mb-3">
-        <section class='member white col-sm-5'>
-          <div class="back-break">
-            <table border="0" width="100%">
-              <tr style="text-align: center">
-                <td></td>
-                <td>選手名</td>
-                <td>試</td>
-                <td>防</td>
-                <td>勝</td>
-                <td>敗</td>
-                <td>H</td>
-                <td>S</td>
-              </tr>
-              <tr v-for="(player, index) in rotation_manage['rotations']" style="text-align: center">
-                <td v-if="index == 0">先発</td>
-                <td v-else-if="index == 6">中継ぎ</td>
-                <td v-else-if="index == 9">守護神</td>
-                <td v-else></td>
-                <td>{{ player['name'] }}</td>
-                <td>{{ player['match'] }}</td>
-                <td>{{ player['era'] }}</td>
-                <td>{{ player['win'] }}</td>
-                <td>{{ player['defeat'] }}</td>
-                <td>{{ player['hold'] }}</td>
-                <td>{{ player['save_point'] }}</td>
-              </tr>
-            </table>
-            <p class="text-center mb-0">
-              {{ rotation_manage['comment'] }}
-            </p>
-          </div>
-        </section>
-        <section class='member col-sm-7 py-1 text-dark'>
-          <div class="coment">
-            <form @submit.prevent="create_user_comment(rotation_manage['id'])" class="pt-2">
-              <input type='text' v-model="user_comment">
-              <input type='submit' value='コメント投稿'>
-            </form>
-            <div class="text-coment">
-              <p v-for="user_comment in rotation_manage['user_comments']" class="mb-1">
-                {{ user_comment }}
-              </p>
+      <div v-for="rotation_manage in api_data['rotation_manages']" class="bbs-contet mb-3">
+        <h6 class="text-center white manage-tit">
+          {{ rotation_manage['comment'] }}
+        </h6>
+        <div class="row">
+          <section class='member white col-sm-5'>
+            <div class="back-break">
+              <table border="0" width="100%">
+                <tr style="text-align: center">
+                  <td></td>
+                  <td>選手名</td>
+                  <td>試</td>
+                  <td>防</td>
+                  <td>勝</td>
+                  <td>敗</td>
+                  <td>H</td>
+                  <td>S</td>
+                </tr>
+                <tr v-for="(player, index) in rotation_manage['rotations']" style="text-align: center">
+                  <td v-if="index == 0">先発</td>
+                  <td v-else-if="index == 6">中継ぎ</td>
+                  <td v-else-if="index == 9">守護神</td>
+                  <td v-else></td>
+                  <td>{{ player['name'] }}</td>
+                  <td>{{ player['match'] }}</td>
+                  <td>{{ player['era'] }}</td>
+                  <td>{{ player['win'] }}</td>
+                  <td>{{ player['defeat'] }}</td>
+                  <td>{{ player['hold'] }}</td>
+                  <td>{{ player['save_point'] }}</td>
+                </tr>
+              </table>
             </div>
-          </div>
-        </section>
+          </section>
+          <section class='member col-sm-7 py-1 text-dark'>
+            <div class="coment">
+              <form @submit.prevent="create_user_comment(rotation_manage['id'])" class="py-2">
+                <input type='text' v-model="user_comment">
+                <input class="btn btn-light comment-btn" type="submit" value="投稿">
+              </form>
+              <div class="text-coment">
+                <p v-for="user_comment in rotation_manage['user_comments']" class="mb-1">
+                  {{ user_comment }}
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
     <div class="footer-nav text-center text-muted py-sm-4 py-3 fixed-bottom">

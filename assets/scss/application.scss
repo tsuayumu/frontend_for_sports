@@ -72,6 +72,11 @@ $color-04: #f2f2f2; //ほぼ白
 .select-form {
 	max-width: 140px;
 }
+.manage-tit {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
 
 //header------------------------------------------------
 header {
@@ -157,7 +162,6 @@ footer {
 		margin:10px 0 5px 0;
 	}
 	.text-coment {
-		min-height: 100px; 
 		max-height: 150px; 
 		overflow: scroll;
 	}
@@ -168,6 +172,10 @@ footer {
 			overflow: scroll;
 		}
 	}
+}
+.comment-btn {
+	padding: 2px 10px;
+	vertical-align: top;
 }
 
 .bbs-content {
