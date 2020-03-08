@@ -66,6 +66,7 @@
               <form @submit.prevent="create_user_comment(lineup_manage['id'])" class="py-2">
                 <input type='text' v-model="user_comment">
                 <input class="btn btn-light comment-btn" type="submit" value="投稿">
+                <button v-bind:disabled="lineup_manage['like_flg']" v-on:click="count_like(lineup_manage)" class="btn btn-light comment-btn" type="button">いいね {{ lineup_manage['like'] }}</button>
               </form>
               <div class="text-coment">
                 <p v-for="user_comment in lineup_manage['user_comments']" class="mb-1">
@@ -142,6 +143,13 @@ export default {
           this.api_data['lineup_manages'][index]['user_comments'].push(data['user_comment']);
         }
       }
+    },
+    async count_like (lineup_manage) {
+      const { data } = await axios.post(`http://localhost:4000/api/lineup_manage_like`, {
+        lineup_manage_id: lineup_manage['id']
+      })
+      lineup_manage['like'] = data['like']
+      lineup_manage['like_flg'] = true
     },
     player_record: function (batter_id, record) {
       for(var index in this.api_data['select_players']){
