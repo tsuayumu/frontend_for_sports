@@ -15,6 +15,11 @@
             </tr>
           </table>
         </div>
+        <div class='block'>
+          ポイント
+          <br>
+          <input type='text' v-model="comment">
+        </div>
         <input type='submit' value='投稿'>
       </form>
     </div>
@@ -24,6 +29,9 @@
       <div class="row">
         <div v-for="ranking_manage in api_data['ranking_manages']" class="col-sm-4 bbs-contet mb-3">
           <section class='member white'>
+            <h6 class="text-center white manage-tit">
+              {{ ranking_manage['comment'] }}
+            </h6>
             <div class="back-break">
               <table border="0" width="100%">
                 <tr v-for="(ranking, index) in ranking_manage['rankings']" style="text-align: center">
@@ -67,6 +75,7 @@ export default {
       const { data } = await axios.post(`http://localhost:4000/api/ranking_manage`, {
         year: this.api_data['year'],
         league_id: this.api_data['league']['id'],
+        comment: this.comment,
         ranking: [
           this.api_data['selected_teams'][0],
           this.api_data['selected_teams'][1],
@@ -78,7 +87,8 @@ export default {
       })
       this.api_data['ranking_manages'].unshift(
         {
-          rankings: data['rankings']
+          rankings: data['rankings'],
+          comment: this.comment
         }
       )
       this.is_create_ranking = false
