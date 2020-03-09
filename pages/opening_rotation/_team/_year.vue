@@ -113,7 +113,7 @@ import axios from 'axios'
 
 export default {
   async asyncData ({ params }) {
-    const { data } = await axios.get(`http://sports-web/api/rotation_manage/${params.team}/${params.year}`)
+    const { data } = await axios.get(`http://sports-memory.com/api/rotation_manage/${params.team}/${params.year}`)
     return { api_data: data }
   },
   data() {
@@ -123,7 +123,12 @@ export default {
   },
   methods: {
     async create_rotation () {
-      const { data } = await axios.post(`http://localhost:4000/api/rotation_manage`, {
+      this.$gtag('event', 'クリック計測', {
+        'event_category': '作成',
+        'event_label': 'Rotation',
+        'value': 1
+      });
+      const { data } = await axios.post(`http://sports-memory.com/api/rotation_manage`, {
         year: this.api_data['year'],
         team_id: this.api_data['team']['id'],
         rotation: [
@@ -151,7 +156,12 @@ export default {
       this.is_create_rotation = false
     },
     async create_user_comment (rotation_manage_id) {
-      const { data } = await axios.post(`http://localhost:4000/api/rotation_manage_user_comment`, {
+      this.$gtag('event', 'クリック計測', {
+        'event_category': 'コメント',
+        'event_label': 'Rotation',
+        'value': 1
+      });
+      const { data } = await axios.post(`http://sports-memory.com/api/rotation_manage_user_comment`, {
         rotation_manage_id: rotation_manage_id,
         user_comment: this.user_comment
       })

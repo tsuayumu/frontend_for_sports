@@ -62,7 +62,7 @@ import axios from 'axios'
 
 export default {
   async asyncData ({ params }) {
-    const { data } = await axios.get(`http://sports-web/api/ranking/${params.league}/${params.year}`)
+    const { data } = await axios.get(`http://sports-memory.com/api/ranking/${params.league}/${params.year}`)
     return { api_data: data }
   },
   data() {
@@ -72,7 +72,12 @@ export default {
   },
   methods: {
     async create_ranking () {
-      const { data } = await axios.post(`http://localhost:4000/api/ranking_manage`, {
+      this.$gtag('event', 'クリック計測', {
+        'event_category': '作成',
+        'event_label': 'Ranking',
+        'value': 1
+      });
+      const { data } = await axios.post(`http://sports-memory.com/api/ranking_manage`, {
         year: this.api_data['year'],
         league_id: this.api_data['league']['id'],
         comment: this.comment,
