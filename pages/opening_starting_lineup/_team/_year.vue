@@ -106,6 +106,11 @@ export default {
   },
   methods: {
     async create_lineup () {
+      this.$gtag('event', 'クリック計測', {
+        'event_category': '作成',
+        'event_label': 'Lineup',
+        'value': 1
+      });
       const { data } = await axios.post(`http://localhost:4000/api/lineup_manage`, {
         year: this.api_data['year'],
         team_id: this.api_data['team']['id'],
@@ -133,6 +138,11 @@ export default {
       this.is_create_lineup = false
     },
     async create_user_comment (lineup_manage_id) {
+      this.$gtag('event', 'クリック計測', {
+        'event_category': 'コメント',
+        'event_label': 'Lineup',
+        'value': 1
+      });
       const { data } = await axios.post(`http://localhost:4000/api/lineup_manage_user_comment`, {
         lineup_manage_id: lineup_manage_id,
         user_comment: this.user_comment
@@ -145,6 +155,11 @@ export default {
       }
     },
     async count_like (lineup_manage) {
+      this.$gtag('event', 'クリック計測', {
+        'event_category': 'いいね',
+        'event_label': 'Lineup',
+        'value': 1
+      });
       const { data } = await axios.post(`http://localhost:4000/api/lineup_manage_like`, {
         lineup_manage_id: lineup_manage['id']
       })

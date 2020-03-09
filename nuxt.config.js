@@ -34,7 +34,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~plugins/ga.js', mode: 'client' }
+    // { src: '~plugins/ga.js', mode: 'client' }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -46,6 +46,13 @@ export default {
   */
   modules: [
     'bootstrap-vue/nuxt',
+    [
+      '@nuxtjs/google-gtag',
+      {
+        id: 'UA-71664741-4', //あなたのGoogleアナリティクスのプロパティID
+        debug: false //本番環境以外でもGAを有効にしたい場合はtrueに。
+      }
+    ]
   ],
   /*
   ** Build configuration
