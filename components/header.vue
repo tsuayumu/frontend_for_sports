@@ -19,6 +19,7 @@
           <li class="nav-item"><a href="/opening_starting_lineup/marines/2020" class="nav-link">Marines</a></li>
           <li class="nav-item"><a href="/opening_starting_lineup/eagles/2020" class="nav-link">Eagles</a></li>
           <li class="nav-item"><a href="/opening_starting_lineup/lions/2020" class="nav-link">Lions</a></li>
+          <li class="nav-item"><a href="/opening_starting_lineup/japan/2020" class="nav-link">Japan</a></li>
         </ul>
       </div>
     </nav>
