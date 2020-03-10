@@ -96,7 +96,7 @@ import axios from 'axios'
 
 export default {
   async asyncData ({ params, route }) {
-    const { data } = await axios.get(`http://sports-web/api/lineup_manage/${params.team}/${params.year}`)
+    const { data } = await axios.get(`http://sports-memory.com/api/lineup_manage/${params.team}/${params.year}`)
     return { api_data: data }
   },
   data() {
@@ -111,7 +111,7 @@ export default {
         'event_label': 'Lineup',
         'value': 1
       });
-      const { data } = await axios.post(`http://localhost:4000/api/lineup_manage`, {
+      const { data } = await axios.post(`http://sports-memory.com/api/lineup_manage`, {
         year: this.api_data['year'],
         team_id: this.api_data['team']['id'],
         lineup: [
@@ -143,7 +143,7 @@ export default {
         'event_label': 'Lineup',
         'value': 1
       });
-      const { data } = await axios.post(`http://localhost:4000/api/lineup_manage_user_comment`, {
+      const { data } = await axios.post(`http://sports-memory.com/api/lineup_manage_user_comment`, {
         lineup_manage_id: lineup_manage_id,
         user_comment: this.user_comment
       })
@@ -160,7 +160,7 @@ export default {
         'event_label': 'Lineup',
         'value': 1
       });
-      const { data } = await axios.post(`http://localhost:4000/api/lineup_manage_like`, {
+      const { data } = await axios.post(`http://sports-memory.com/api/lineup_manage_like`, {
         lineup_manage_id: lineup_manage['id']
       })
       lineup_manage['like'] = data['like']

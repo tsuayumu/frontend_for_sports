@@ -39,7 +39,7 @@ import axios from 'axios'
 
 export default {
   async asyncData () {
-    const { data } = await axios.get(`http://sports-web/api/`)
+    const { data } = await axios.get(`http://sports-memory.com/api/`)
     return { api_data: data }
   },
   methods: {
