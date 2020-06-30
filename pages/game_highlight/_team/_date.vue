@@ -64,7 +64,7 @@ export default {
   async asyncData ({ params }) {
     // 開発 http://sports-web
     // 本番 http://sports-memory.com
-    const { data } = await axios.get(`http://sports-web/api/game_highlight/${params.team}/${params.date}`)
+    const { data } = await axios.get(`http://sports-memory.com/api/game_highlight/${params.team}/${params.date}`)
     return {
       api_data: data
     }
