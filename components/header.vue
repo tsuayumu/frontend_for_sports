@@ -60,7 +60,7 @@ export default {
       if (d < 10) {
         d = '0' + d;
       }
-      return `/game_highlight/${name_en}/${y}${m}${d}`
+      return `/game/${name_en}/${y}${m}${d}`
     }
   }
 }

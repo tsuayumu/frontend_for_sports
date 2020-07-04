@@ -173,10 +173,10 @@ export default {
       this.is_visible_game_comment = true
     },
     left_href: function() {
-      return `/game_highlight/${this.game_highligt_data['team']['name_en']}/${Number(this.game_highligt_data['date_integer'])-1}`
+      return `/game/${this.game_highligt_data['team']['name_en']}/${Number(this.game_highligt_data['date_integer'])-1}`
     },
     right_href: function() {
-      return `/game_highlight/${this.game_highligt_data['team']['name_en']}/${Number(this.game_highligt_data['date_integer'])+1}`
+      return `/game/${this.game_highligt_data['team']['name_en']}/${Number(this.game_highligt_data['date_integer'])+1}`
     },
     player_record: function (batter_id, record) {
       for(var index in this.daily_lineup_data['select_players']){
