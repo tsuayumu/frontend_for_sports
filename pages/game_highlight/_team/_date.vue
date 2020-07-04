@@ -30,27 +30,51 @@
       </form>
     </div>
 
-    <form @submit.prevent="create_highlight" class="py-3">
-      <div class='block'>
-        <textarea v-model="comment" rows="4" cols="35" placeholder="あなたの見所は？"></textarea>
-      </div>
-      <input type='submit' value='投稿'>
-    </form>
+    <div v-show="is_visible_highlight">
+      <form @submit.prevent="create_highlight" class="py-3">
+        <div class='block'>
+          <textarea v-model="highligt_comment" rows="4" cols="35" placeholder="あなたの見所は？"></textarea>
+        </div>
+        <input type='submit' value='投稿'>
+      </form>
 
-    <div class="container" style="white-space: pre-line;">
-      <h5 class="text-dark bg-light my-3 p-1">みんなの見所</h5>
-      <div v-for="highlight_text in game_highligt_data['highlight_texts']" class="bbs-contet mb-3">
-        <p class="white manage-tit text-left">{{highlight_text}}</p>
+      <div class="container" style="white-space: pre-line;">
+        <h5 class="text-dark bg-light my-3 p-1">みんなの見所</h5>
+        <div v-for="highlight_text in game_highligt_data['highlight_texts']" class="bbs-contet mb-3">
+          <p class="white manage-tit text-left">{{highlight_text}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div v-show="is_visible_game_comment">
+      <form @submit.prevent="create_game_comment" class="py-3">
+        <div class='block'>
+          <textarea v-model="game_comment" rows="4" cols="35" placeholder="試合のコメントをどうそ！"></textarea>
+        </div>
+        <input type='submit' value='投稿'>
+      </form>
+
+      <div class="container" style="white-space: pre-line;">
+        <h5 class="text-dark bg-light my-3 p-1">みんなのコメント</h5>
+        <div v-for="game_comment_text in game_comment_data['game_comment_texts']" class="bbs-contet mb-3">
+          <p class="white manage-tit text-left">{{game_comment_text}}</p>
+        </div>
       </div>
     </div>
 
     <div class="footer-nav text-center text-muted py-sm-4 py-3 fixed-bottom">
       <div class="row">
-        <a class="col-6 border-right" :href="left_href()">
-          ＜　前の日の見所
+        <a class="col-4 border-right" :href="left_href()">
+          ＜　前の日
         </a>
-        <a class="col-6" :href="right_href()">
-          次の日の見所　＞
+        <div v-if="is_visible_highlight" class="col-4 border-right" v-on:click="switch_game_comment()">
+          試合中
+        </div>
+        <a v-if="is_visible_game_comment" class="col-4 border-right" v-on:click="switch_game_highlight()">
+          試合前
+        </a>
+        <a class="col-4" :href="right_href()">
+          次の日　＞
         </a>
       </div>
     </div>
@@ -65,20 +89,23 @@ export default {
     // 開発 http://sports-web
     // 本番 http://sports-memory.com
     // 2つのHTTPのレスポンスを受けてからページがレンダリングされる
-    const [game_highligt_data, daily_lineup_data] = await Promise.all([
+    const [game_highligt_data, daily_lineup_data, game_comment_data] = await Promise.all([
       axios.get(`http://sports-web/api/game_highlight/${params.team}/${params.date}`),
       axios.get(`http://sports-web/api/daily_lineup_manage/${params.team}/${params.date}`),
+      axios.get(`http://sports-web/api/game_comment/${params.team}/${params.date}`)
     ]);
-    console.log(game_highligt_data['data'])
-    console.log(daily_lineup_data['data'])
+    console.log(game_comment_data['data'])
     return {
       game_highligt_data: game_highligt_data['data'],
-      daily_lineup_data: daily_lineup_data['data']
+      daily_lineup_data: daily_lineup_data['data'],
+      game_comment_data: game_comment_data['data']
     }
   },
   data() {
     return {
-      is_update_lineup: true
+      is_update_lineup: true,
+      is_visible_highlight: true,
+      is_visible_game_comment: false
     }
   },
   methods: {
@@ -118,9 +145,32 @@ export default {
       const { data } = await axios.post(`http://localhost:4000/api/game_highlight`, {
         date: this.game_highligt_data['date'],
         team_id: this.game_highligt_data['team']['id'],
-        text: this.comment
+        text: this.highligt_comment
       })
-      this.game_highligt_data['highlight_texts'].unshift(this.comment)
+      this.game_highligt_data['highlight_texts'].unshift(this.highligt_comment)
+    },
+    async create_game_comment () {
+      this.$gtag('event', 'クリック計測', {
+        'event_category': '作成',
+        'event_label': 'GameComment',
+        'value': 1
+      });
+      // 開発 http://localhost:4000
+      // 本番 http://sports-memory.com
+      const { data } = await axios.post(`http://localhost:4000/api/game_comment`, {
+        date: this.game_comment_data['date'],
+        team_id: this.game_comment_data['team']['id'],
+        text: this.game_comment
+      })
+      this.game_comment_data['game_comment_texts'].unshift(this.game_comment)
+    },
+    async switch_game_highlight() {
+      this.is_visible_highlight = true
+      this.is_visible_game_comment = false
+    },
+    async switch_game_comment() {
+      this.is_visible_highlight = false
+      this.is_visible_game_comment = true
     },
     left_href: function() {
       return `/game_highlight/${this.game_highligt_data['team']['name_en']}/${Number(this.game_highligt_data['date_integer'])-1}`
