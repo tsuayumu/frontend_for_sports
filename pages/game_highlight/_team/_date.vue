@@ -64,7 +64,7 @@ export default {
   async asyncData ({ params }) {
     // 開発 http://sports-web
     // 本番 http://sports-memory.com
-    const { data } = await axios.get(`http://sports-memory.com/api/game_highlight/${params.team}/${params.date}`)
+    const { data } = await axios.get(`http://sports-web/api/game_highlight/${params.team}/${params.date}`)
     return {
       api_data: data
     }
@@ -81,7 +81,9 @@ export default {
         'event_label': 'DailyLineup',
         'value': 1
       });
-      const { data } = await axios.post(`http://sports-memory.com/api/daily_lineup_manage`, {
+      // 開発 http://localhost:4000
+      // 本番 http://sports-memory.com
+      const { data } = await axios.post(`http://localhost:4000/api/daily_lineup_manage`, {
         date: this.api_data['date'],
         team_id: this.api_data['team']['id'],
         lineup: [
@@ -106,7 +108,7 @@ export default {
       });
       // 開発 http://localhost:4000
       // 本番 http://sports-memory.com
-      const { data } = await axios.post(`http://sports-memory.com/api/game_highlight`, {
+      const { data } = await axios.post(`http://localhost:4000/api/game_highlight`, {
         date: this.api_data['date'],
         team_id: this.api_data['team']['id'],
         text: this.comment
