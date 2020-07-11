@@ -30,14 +30,7 @@
       </form>
     </div>
 
-    <div v-show="is_visible_highlight">
-      <form @submit.prevent="create_highlight" class="py-3">
-        <div class='block'>
-          <textarea v-model="highligt_comment" rows="4" cols="35" placeholder="あなたの見所は？"></textarea>
-        </div>
-        <input type='submit' value='投稿'>
-      </form>
-
+    <div>
       <div class="container" style="white-space: pre-line;">
         <h5 class="text-dark bg-light my-3 p-1">みんなの見所</h5>
         <div v-for="highlight_text in game_highligt_data['highlight_texts']" class="bbs-contet mb-3">
@@ -46,14 +39,7 @@
       </div>
     </div>
 
-    <div v-show="is_visible_game_comment">
-      <form @submit.prevent="create_game_comment" class="py-3">
-        <div class='block'>
-          <textarea v-model="game_comment" rows="4" cols="35" placeholder="試合のコメントをどうそ！"></textarea>
-        </div>
-        <input type='submit' value='投稿'>
-      </form>
-
+    <div>
       <div class="container" style="white-space: pre-line;">
         <h5 class="text-dark bg-light my-3 p-1">みんなのコメント</h5>
         <div v-for="game_comment_text in game_comment_data['game_comment_texts']" class="bbs-contet mb-3">
@@ -62,20 +48,20 @@
       </div>
     </div>
 
-    <div class="footer-nav text-center text-muted py-sm-4 py-3 fixed-bottom">
-      <div class="row">
-        <a class="col-4 border-right" :href="left_href()">
-          ＜　前の日
-        </a>
-        <div v-if="is_visible_highlight" class="col-4 border-right" v-on:click="switch_game_comment()">
-          試合中
-        </div>
-        <a v-if="is_visible_game_comment" class="col-4 border-right" v-on:click="switch_game_highlight()">
-          試合前
-        </a>
-        <a class="col-4" :href="right_href()">
-          次の日　＞
-        </a>
+    <div class="footer-nav text-center text-muted py-1 fixed-bottom">
+      <div class="container">
+        <form @submit.prevent="create_highlight" class="py-1 row" style="width: 100%; margin: 0 auto;">
+          <input type="text" v-model="highligt_comment" placeholder="あなたの見所は？" class='col-10'></input>
+          <div class="col-2 text-center">
+            <input type='submit' value='投稿'>
+          </div>
+        </form>
+        <form @submit.prevent="create_game_comment" class="py-1 row" style="width: 100%; margin: 0 auto;">
+          <input type="text" v-model="game_comment" placeholder="試合のコメントをどうそ！" class='col-10'></input>
+          <div class="col-2 text-center">
+            <input type='submit' value='投稿'>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -103,9 +89,7 @@ export default {
   },
   data() {
     return {
-      is_update_lineup: true,
-      is_visible_highlight: true,
-      is_visible_game_comment: false
+      is_update_lineup: true
     }
   },
   methods: {
@@ -171,12 +155,6 @@ export default {
     async switch_game_comment() {
       this.is_visible_highlight = false
       this.is_visible_game_comment = true
-    },
-    left_href: function() {
-      return `/game/${this.game_highligt_data['team']['name_en']}/${Number(this.game_highligt_data['date_integer'])-1}`
-    },
-    right_href: function() {
-      return `/game/${this.game_highligt_data['team']['name_en']}/${Number(this.game_highligt_data['date_integer'])+1}`
     },
     player_record: function (batter_id, record) {
       for(var index in this.daily_lineup_data['select_players']){
