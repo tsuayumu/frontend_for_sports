@@ -42,21 +42,30 @@
     <div>
       <div class="container" style="white-space: pre-line;">
         <h5 class="text-dark bg-light my-3 p-1">みんなのコメント</h5>
+        <div v-for="(inning_text, index) in game_data['inning_texts']" class="bbs-contet mb-3">
+          <div class="white text-left bg-secondary px-1 py-2" style="white-space: pre-line">
+            <h6 class=''>{{ inning_text['inning'] }}</h6>
+            <p class="mb-1">{{inning_text['text']}}</p>
+          </div>
+          <div v-for="game_comment_text in game_comment_data['game_comment_texts']" class="bbs-contet mb-3">
+            <p v-if="game_comment_text['comment_at'] < inning_text['updated_at']" class="white manage-tit text-left">{{game_comment_text['text']}}</p>
+          </div>
+        </div>
         <div v-for="game_comment_text in game_comment_data['game_comment_texts']" class="bbs-contet mb-3">
-          <p class="white manage-tit text-left">{{game_comment_text}}</p>
+          <p v-if="game_comment_text['comment_at'] > game_data['inning_texts'][game_data['inning_texts'].length - 1]['updated_at']" class="white manage-tit text-left">{{game_comment_text['text']}}</p>
         </div>
       </div>
     </div>
 
     <div class="footer-nav text-center text-muted py-1 fixed-bottom">
       <div class="container">
-        <form @submit.prevent="create_highlight" class="py-1 row" style="width: 100%; margin: 0 auto;">
+        <form v-if="game_data['inning_texts'].length == 0" @submit.prevent="create_highlight" class="py-1 row" style="width: 100%; margin: 0 auto;">
           <input type="text" v-model="highligt_comment" placeholder="あなたの見所は？" class='col-10'></input>
           <div class="col-2 text-center">
             <input type='submit' value='投稿'>
           </div>
         </form>
-        <form @submit.prevent="create_game_comment" class="py-1 row" style="width: 100%; margin: 0 auto;">
+        <form v-if="game_data['inning_texts'].length > 0" @submit.prevent="create_game_comment" class="py-1 row" style="width: 100%; margin: 0 auto;">
           <input type="text" v-model="game_comment" placeholder="試合のコメントをどうそ！" class='col-10'></input>
           <div class="col-2 text-center">
             <input type='submit' value='投稿'>
@@ -75,13 +84,15 @@ export default {
     // 開発 http://sports-web
     // 本番 http://sports-memory.com
     // 2つのHTTPのレスポンスを受けてからページがレンダリングされる
-    const [game_highligt_data, daily_lineup_data, game_comment_data] = await Promise.all([
-      axios.get(`http://sports-memory.com/api/game_highlight/${params.team}/${params.date}`),
-      axios.get(`http://sports-memory.com/api/daily_lineup_manage/${params.team}/${params.date}`),
-      axios.get(`http://sports-memory.com/api/game_comment/${params.team}/${params.date}`)
+    const [game_data, game_highligt_data, daily_lineup_data, game_comment_data] = await Promise.all([
+      axios.get(`http://sports-web/api/game/${params.team}/${params.date}`),
+      axios.get(`http://sports-web/api/game_highlight/${params.team}/${params.date}`),
+      axios.get(`http://sports-web/api/daily_lineup_manage/${params.team}/${params.date}`),
+      axios.get(`http://sports-web/api/game_comment/${params.team}/${params.date}`)
     ]);
-    console.log(game_comment_data['data'])
+    console.log(game_data['data'])
     return {
+      game_data: game_data['data'],
       game_highligt_data: game_highligt_data['data'],
       daily_lineup_data: daily_lineup_data['data'],
       game_comment_data: game_comment_data['data']
@@ -131,6 +142,7 @@ export default {
         team_id: this.game_highligt_data['team']['id'],
         text: this.highligt_comment
       })
+      this.highligt_comment = ''
       this.game_highligt_data['highlight_texts'].unshift(this.highligt_comment)
     },
     async create_game_comment () {
@@ -141,12 +153,18 @@ export default {
       });
       // 開発 http://localhost:4000
       // 本番 http://sports-memory.com
-      const { data } = await axios.post(`http://sports-memory.com/api/game_comment`, {
+      const { data } = await axios.post(`http://localhost:4000/api/game_comment`, {
         date: this.game_comment_data['date'],
         team_id: this.game_comment_data['team']['id'],
         text: this.game_comment
       })
-      this.game_comment_data['game_comment_texts'].unshift(this.game_comment)
+      this.game_comment = ''
+      this.game_comment_data['game_comment_texts'].unshift(
+        {
+          text: data['text'],
+          comment_at: data['comment_at']
+        }
+      )
     },
     async switch_game_highlight() {
       this.is_visible_highlight = true
