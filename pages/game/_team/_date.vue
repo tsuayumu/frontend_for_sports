@@ -1,5 +1,5 @@
 <template>
-  <div :id="game_highligt_data['team']['name_en']" class="pt-3 text-center">
+  <div :id="game_highligt_data['team']['name_en']" class="pt-3">
     <h3 class='page-tit white'>本日の見所<br>{{ game_highligt_data['team']['name'] }}戦<br>{{ game_highligt_data['date'] }}</h3>
 
     <div class='form-content container'>
@@ -34,7 +34,7 @@
       <div class="container" style="white-space: pre-line;">
         <h5 class="text-dark bg-light my-3 p-1">みんなの見所</h5>
         <div v-for="highlight_text in game_highligt_data['highlight_texts']" class="bbs-contet mb-3">
-          <p class="white manage-tit text-left">{{highlight_text}}</p>
+          <p class="white text-left balloon1-left text-left">{{highlight_text}}</p>
         </div>
       </div>
     </div>
@@ -43,16 +43,16 @@
       <div class="container" style="white-space: pre-line;">
         <h5 class="text-dark bg-light my-3 p-1">みんなのコメント</h5>
         <div v-for="(inning_text, index) in game_data['inning_texts']" class="bbs-contet mb-3">
-          <div class="white text-left bg-secondary px-1 py-2" style="white-space: pre-line">
+          <div class="white text-left bg-secondary px-2 py-2" style="white-space: pre-line">
             <h6 class=''>{{ inning_text['inning'] }}</h6>
             <p class="mb-1">{{inning_text['text']}}</p>
           </div>
           <div v-for="game_comment_text in game_comment_data['game_comment_texts']" class="bbs-contet mb-3">
-            <p v-if="game_comment_text['comment_at'] < inning_text['updated_at']" class="white manage-tit text-left">{{game_comment_text['text']}}</p>
+            <p v-if="game_comment_text['comment_at'] < inning_text['updated_at']" class="white text-left balloon1-left text-left">{{game_comment_text['text']}}</p>
           </div>
         </div>
         <div v-for="game_comment_text in game_comment_data['game_comment_texts']" class="bbs-contet mb-3">
-          <p v-if="game_comment_text['comment_at'] > game_data['inning_texts'][game_data['inning_texts'].length - 1]['updated_at']" class="white manage-tit text-left">{{game_comment_text['text']}}</p>
+          <p v-if="game_comment_text['comment_at'] > game_data['inning_texts'][game_data['inning_texts'].length - 1]['updated_at']" class="white text-left balloon1-left text-left">{{game_comment_text['text']}}</p>
         </div>
       </div>
     </div>
@@ -62,13 +62,13 @@
         <form v-if="game_data['inning_texts'].length == 0" @submit.prevent="create_highlight" class="py-1 row" style="width: 100%; margin: 0 auto;">
           <input type="text" v-model="highligt_comment" placeholder="あなたの見所は？" class='col-10'></input>
           <div class="col-2 text-center">
-            <input type='submit' value='投稿'>
+            <input type='submit' value='▶︎'>
           </div>
         </form>
         <form v-if="game_data['inning_texts'].length > 0" @submit.prevent="create_game_comment" class="py-1 row" style="width: 100%; margin: 0 auto;">
           <input type="text" v-model="game_comment" placeholder="試合のコメントをどうそ！" class='col-10'></input>
           <div class="col-2 text-center">
-            <input type='submit' value='投稿'>
+            <input type='submit' value='▶︎'>
           </div>
         </form>
       </div>
@@ -141,8 +141,8 @@ export default {
         team_id: this.game_highligt_data['team']['id'],
         text: this.highligt_comment
       })
+      this.game_highligt_data['highlight_texts'].push(this.highligt_comment)
       this.highligt_comment = ''
-      this.game_highligt_data['highlight_texts'].unshift(this.highligt_comment)
     },
     async create_game_comment () {
       this.$gtag('event', 'クリック計測', {
@@ -158,7 +158,7 @@ export default {
         text: this.game_comment
       })
       this.game_comment = ''
-      this.game_comment_data['game_comment_texts'].unshift(
+      this.game_comment_data['game_comment_texts'].push(
         {
           text: data['text'],
           comment_at: data['comment_at']
@@ -183,3 +183,35 @@ export default {
   }
 }
 </script>
+
+<style>
+  /* 吹き出し */
+  .balloon1-left {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    position: relative;
+    display: inline-block;
+    margin: 0 0 0 10px;
+    padding: 7px 10px;
+    min-width: 120px;
+    max-width: 100%;
+    color: #000;
+    font-size: 16px;
+    background: #fff;
+    border-radius: 5px;
+  }
+  .balloon1-left:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 3px; 
+    left: -19px;
+    border: 8px solid transparent;
+    border-right: 18px solid #fff;
+    -webkit-transform: rotate(35deg);
+    transform: rotate(35deg);
+  }
+  .balloon1-left p {
+    margin: 0;
+    padding: 0;
+  }
+</style>
