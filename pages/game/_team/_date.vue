@@ -47,8 +47,10 @@
             <h6 class=''>{{ inning_text['inning'] }}</h6>
             <p class="mb-1">{{inning_text['text']}}</p>
           </div>
-          <div v-for="game_comment_text in game_comment_data['game_comment_texts']" class="bbs-contet mb-3">
-            <p v-if="game_comment_text['comment_at'] < inning_text['updated_at']" class="white text-left balloon1-left text-left">{{game_comment_text['text']}}</p>
+          <div v-for="(game_comment_text) in game_comment_data['game_comment_texts']" class="bbs-contet mb-3">
+            <div v-if="index > 0 && game_data['inning_texts'][index-1]['updated_at'] < game_comment_text['comment_at']">
+              <p v-if="game_comment_text['comment_at'] < inning_text['updated_at']" class="white text-left balloon1-left text-left">{{game_comment_text['text']}}</p>
+            </div>
           </div>
         </div>
         <div v-for="game_comment_text in game_comment_data['game_comment_texts']" class="bbs-contet mb-3">
