@@ -43,7 +43,7 @@
       <div class="container" style="white-space: pre-line;">
         <h5 class="text-dark bg-light my-3 p-1">みんなのコメント</h5>
         <div v-for="(inning_text, index) in game_data['inning_texts']" class="bbs-contet mb-3">
-          <div class="white text-left bg-secondary px-2 py-2" style="white-space: pre-line">
+          <div v-bind:id="'inning-' + index" class="white text-left bg-secondary px-2 py-2" style="white-space: pre-line; width: 100%;">
             <h6 class=''>{{ inning_text['inning'] }}</h6>
             <p class="mb-1">{{inning_text['text']}}</p>
           </div>
@@ -103,6 +103,151 @@ export default {
     return {
       is_update_lineup: true
     }
+  },
+  mounted() {
+    if ($( '#inning-0' )[0]) { var inningPos_0 = $( '#inning-0' ).offset().top; } else { var inningPos_0 = 1000000; }
+    if ($( '#inning-1' )[0]) { var inningPos_1 = $( '#inning-1' ).offset().top; } else { var inningPos_1 = 1000000; }
+    if ($( '#inning-2' )[0]) { var inningPos_2 = $( '#inning-2' ).offset().top; } else { var inningPos_2 = 1000000; }
+    if ($( '#inning-3' )[0]) { var inningPos_3 = $( '#inning-3' ).offset().top; } else { var inningPos_3 = 1000000; }
+    if ($( '#inning-4' )[0]) { var inningPos_4 = $( '#inning-4' ).offset().top; } else { var inningPos_4 = 1000000; }
+    if ($( '#inning-5' )[0]) { var inningPos_5 = $( '#inning-5' ).offset().top; } else { var inningPos_5 = 1000000; }
+    if ($( '#inning-6' )[0]) { var inningPos_6 = $( '#inning-6' ).offset().top; } else { var inningPos_6 = 1000000; }
+    if ($( '#inning-7' )[0]) { var inningPos_7 = $( '#inning-7' ).offset().top; } else { var inningPos_7 = 1000000; }
+    if ($( '#inning-8' )[0]) { var inningPos_8 = $( '#inning-8' ).offset().top; } else { var inningPos_8 = 1000000; }
+    if ($( '#inning-9' )[0]) { var inningPos_9 = $( '#inning-9' ).offset().top; } else { var inningPos_9 = 1000000; }
+    if ($( '#inning-10' )[0]) { var inningPos_10 = $( '#inning-10' ).offset().top; } else { var inningPos_10 = 1000000; }
+    if ($( '#inning-11' )[0]) { var inningPos_11 = $( '#inning-11' ).offset().top; } else { var inningPos_11 = 1000000; }
+    if ($( '#inning-12' )[0]) { var inningPos_12 = $( '#inning-12' ).offset().top; } else { var inningPos_12 = 1000000; }
+    if ($( '#inning-13' )[0]) { var inningPos_13 = $( '#inning-13' ).offset().top; } else { var inningPos_13 = 1000000; }
+    if ($( '#inning-14' )[0]) { var inningPos_14 = $( '#inning-14' ).offset().top; } else { var inningPos_14 = 1000000; }
+    if ($( '#inning-15' )[0]) { var inningPos_15 = $( '#inning-15' ).offset().top; } else { var inningPos_15 = 1000000; }
+    if ($( '#inning-16' )[0]) { var inningPos_16 = $( '#inning-16' ).offset().top; } else { var inningPos_16 = 1000000; }
+    if ($( '#inning-17' )[0]) { var inningPos_17 = $( '#inning-17' ).offset().top; } else { var inningPos_17 = 1000000; }
+    if ($( '#inning-18' )[0]) { var inningPos_18 = $( '#inning-18' ).offset().top; } else { var inningPos_18 = 1000000; }
+    if ($( '#inning-19' )[0]) { var inningPos_19 = $( '#inning-19' ).offset().top; } else { var inningPos_19 = 1000000; }
+
+    $( window ).on( 'scroll', function() {
+      if ( $( this ).scrollTop() > inningPos_19 ) {
+        $( '#inning-19' ).addClass( 'm_fixed' );
+        $( '#inning-19' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-18' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_18 ) {
+        $( '#inning-18' ).addClass( 'm_fixed' );
+        $( '#inning-18' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-19' ).removeClass( 'm_fixed' );
+        $( '#inning-17' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_17 ) {
+        $( '#inning-17' ).addClass( 'm_fixed' );
+        $( '#inning-17' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-18' ).removeClass( 'm_fixed' );
+        $( '#inning-16' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_16 ) {
+        $( '#inning-16' ).addClass( 'm_fixed' );
+        $( '#inning-16' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-17' ).removeClass( 'm_fixed' );
+        $( '#inning-15' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_15 ) {
+        $( '#inning-15' ).addClass( 'm_fixed' );
+        $( '#inning-15' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-16' ).removeClass( 'm_fixed' );
+        $( '#inning-14' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_14 ) {
+        $( '#inning-14' ).addClass( 'm_fixed' );
+        $( '#inning-14' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-15' ).removeClass( 'm_fixed' );
+        $( '#inning-13' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_13 ) {
+        $( '#inning-13' ).addClass( 'm_fixed' );
+        $( '#inning-13' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-14' ).removeClass( 'm_fixed' );
+        $( '#inning-12' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_12 ) {
+        $( '#inning-12' ).addClass( 'm_fixed' );
+        $( '#inning-12' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-13' ).removeClass( 'm_fixed' );
+        $( '#inning-11' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_11 ) {
+        $( '#inning-11' ).addClass( 'm_fixed' );
+        $( '#inning-11' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-12' ).removeClass( 'm_fixed' );
+        $( '#inning-10' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_10 ) {
+        $( '#inning-10' ).addClass( 'm_fixed' );
+        $( '#inning-10' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-11' ).removeClass( 'm_fixed' );
+        $( '#inning-9' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_9 ) {
+        $( '#inning-9' ).addClass( 'm_fixed' );
+        $( '#inning-9' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-10' ).removeClass( 'm_fixed' );
+        $( '#inning-8' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_8 ) {
+        $( '#inning-8' ).addClass( 'm_fixed' );
+        $( '#inning-8' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-9' ).removeClass( 'm_fixed' );
+        $( '#inning-7' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_7 ) {
+        $( '#inning-7' ).addClass( 'm_fixed' );
+        $( '#inning-7' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-8' ).removeClass( 'm_fixed' );
+        $( '#inning-6' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_6 ) {
+        $( '#inning-6' ).addClass( 'm_fixed' );
+        $( '#inning-6' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-7' ).removeClass( 'm_fixed' );
+        $( '#inning-5' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_5 ) {
+        $( '#inning-5' ).addClass( 'm_fixed' );
+        $( '#inning-5' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-6' ).removeClass( 'm_fixed' );
+        $( '#inning-4' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_4 ) {
+        $( '#inning-4' ).addClass( 'm_fixed' );
+        $( '#inning-4' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-5' ).removeClass( 'm_fixed' );
+        $( '#inning-3' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_3 ) {
+        $( '#inning-3' ).addClass( 'm_fixed' );
+        $( '#inning-3' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-4' ).removeClass( 'm_fixed' );
+        $( '#inning-2' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_2 ) {
+        $( '#inning-2' ).addClass( 'm_fixed' );
+        $( '#inning-2' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-3' ).removeClass( 'm_fixed' );
+        $( '#inning-1' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_1 ) {
+        $( '#inning-1' ).addClass( 'm_fixed' );
+        $( '#inning-1' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-2' ).removeClass( 'm_fixed' );
+        $( '#inning-0' ).removeClass( 'm_fixed' );
+      } else if ($( this ).scrollTop() > inningPos_0 ) {
+        $( '#inning-0' ).addClass( 'm_fixed' );
+        $( '#inning-0' ).css( 'width', $( '.bbs-contet' ).width() );
+        $( '#inning-1' ).removeClass( 'm_fixed' );
+      } else {
+        $( '#inning-0' ).removeClass( 'm_fixed' );
+        $( '#inning-1' ).removeClass( 'm_fixed' );
+        $( '#inning-2' ).removeClass( 'm_fixed' );
+        $( '#inning-3' ).removeClass( 'm_fixed' );
+        $( '#inning-4' ).removeClass( 'm_fixed' );
+        $( '#inning-5' ).removeClass( 'm_fixed' );
+        $( '#inning-6' ).removeClass( 'm_fixed' );
+        $( '#inning-7' ).removeClass( 'm_fixed' );
+        $( '#inning-8' ).removeClass( 'm_fixed' );
+        $( '#inning-9' ).removeClass( 'm_fixed' );
+        $( '#inning-10' ).removeClass( 'm_fixed' );
+        $( '#inning-11' ).removeClass( 'm_fixed' );
+        $( '#inning-12' ).removeClass( 'm_fixed' );
+        $( '#inning-13' ).removeClass( 'm_fixed' );
+        $( '#inning-14' ).removeClass( 'm_fixed' );
+        $( '#inning-15' ).removeClass( 'm_fixed' );
+        $( '#inning-16' ).removeClass( 'm_fixed' );
+        $( '#inning-17' ).removeClass( 'm_fixed' );
+        $( '#inning-18' ).removeClass( 'm_fixed' );
+        $( '#inning-19' ).removeClass( 'm_fixed' );
+      }
+    });
   },
   methods: {
     async update_lineup () {
@@ -200,6 +345,7 @@ export default {
     font-size: 16px;
     background: #fff;
     border-radius: 5px;
+    z-index: 10;
   }
   .balloon1-left:before {
     content: "";
@@ -216,4 +362,11 @@ export default {
     margin: 0;
     padding: 0;
   }
+
+  .m_fixed {
+    z-index: 20;
+    position: fixed;
+    top: 56px;
+  }
+
 </style>
