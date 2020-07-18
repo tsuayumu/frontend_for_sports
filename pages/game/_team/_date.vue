@@ -1,6 +1,6 @@
 <template>
   <div :id="game_highligt_data['team']['name_en']" class="pt-3">
-    <h3 class='page-tit white'>本日の見所<br>{{ game_highligt_data['team']['name'] }}戦<br>{{ game_highligt_data['date'] }}</h3>
+    <h3 class='page-tit white'>{{ game_highligt_data['date'] }}<br>{{ game_highligt_data['team']['name'] }}戦</h3>
 
     <div class='form-content container'>
       <form @submit.prevent="update_lineup">
@@ -115,6 +115,8 @@ export default {
         inningPosHeight[i] = $( inning_id ).outerHeight() + headerHeight;
       }
     }
+
+    $("html,body").animate({ duration: 'slow', easing: 'swing', scrollTop:$('body').outerHeight()});
 
     $( window ).on( 'scroll', function() {
       for (var i = 0; i < inningPos.length; i++){
