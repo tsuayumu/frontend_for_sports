@@ -124,25 +124,21 @@ export default {
             $( inning_id ).addClass( 'm_fixed' );
             $( inning_id ).css( 'width', $( '.bbs-contet' ).width() );
             $( 'body' ).css( 'padding-top', inningPosHeight[i] );
-            $( inning_id ).css( 'display', 'block' );
           } else {
             $( inning_id ).removeClass( 'm_fixed' );
-            $( inning_id ).css( 'display', 'none' );
           }
         } else {
           if ( inningPos[i] && inningPos[i] < $( this ).scrollTop() && inningPos[i+1] && $( this ).scrollTop() < inningPos[i+1]) {
             $( inning_id ).addClass( 'm_fixed' );
             $( inning_id ).css( 'width', $( '.bbs-contet' ).width() );
             $( 'body' ).css( 'padding-top', inningPosHeight[i] );
-            $( inning_id ).css( 'display', 'block' );
           } else {
             $( inning_id ).removeClass( 'm_fixed' );
-            $( inning_id ).css( 'display', 'none' );
           }
         }
-        if (inningPos[i] && inningPos[i] > $( this ).scrollTop()) {
-          $( 'body' ).css( 'padding-top', 0 );
-        }
+      }
+      if (inningPos[0] && inningPos[0] > $( this ).scrollTop()) {
+        $( 'body' ).css( 'padding-top', 0 );
       }
     });
   },
