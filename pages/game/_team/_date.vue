@@ -59,6 +59,17 @@
       </div>
     </div>
 
+    <div class="container">
+      <div class="row">
+        <a class="col-6 text-center white" :href="left_href()">
+          ＜ 前の日
+        </a>
+        <a class="col-6 text-center white" :href="right_href()">
+          次の日 ＞
+        </a>
+      </div>
+    </div>
+
     <div class="footer-nav text-center text-muted py-1 fixed-bottom">
       <div class="container">
         <form v-if="game_data['inning_texts'].length == 0" @submit.prevent="create_highlight" class="py-1 row" style="width: 100%; margin: 0 auto;">
@@ -221,6 +232,12 @@ export default {
           return this.daily_lineup_data['select_players'][index][record];
         }
       }
+    },
+    left_href: function() {
+      return `/game/${this.game_highligt_data['team']['name_en']}/${Number(this.game_highligt_data['date_integer'])-1}`
+    },
+    right_href: function() {
+      return `/game/${this.game_highligt_data['team']['name_en']}/${Number(this.game_highligt_data['date_integer'])+1}`
     }
   }
 }
