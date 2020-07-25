@@ -15,7 +15,7 @@
         </p>
       </div>
     </section>
-    <!-- <section id='home-03' class='flex'>
+    <section id='home-03' class='flex'>
       <h2 class='home-tit'>
         セリーグ 2020
       </h2>
@@ -30,7 +30,7 @@
       <div v-for="team in api_data['pacific']" class='mb-1'>
         <a :href="getOpeningStartingLineupLink(team['name_en'])" class='white'>{{ team['name'] }}</a>
       </div>
-    </section> -->
+    </section>
   </div>
 </template>
 
@@ -39,8 +39,8 @@ import axios from 'axios'
 
 export default {
   async asyncData () {
-    // const { data } = await axios.get(`http://sports-memory.com/api/`)
-    // return { api_data: data }
+    const { data } = await axios.get(`http://sports-memory.com/api/`)
+    return { api_data: data }
   },
   methods: {
     getTeamImage: function(name) {
