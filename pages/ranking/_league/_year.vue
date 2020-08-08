@@ -64,7 +64,7 @@ export default {
   async asyncData ({ params }) {
     // 開発 http://sports-web
     // 本番 http://sports-memory.com
-    const { data } = await axios.get(`http://sports-memory.com/api/ranking/${params.league}/${params.year}`)
+    const { data } = await axios.get(`https://sports-memory.com/api/ranking/${params.league}/${params.year}`)
     return { api_data: data }
   },
   data() {
@@ -81,7 +81,7 @@ export default {
       });
       // 開発 http://localhost:4000
       // 本番 http://sports-memory.com
-      const { data } = await axios.post(`http://sports-memory.com/api/ranking_manage`, {
+      const { data } = await axios.post(`https://sports-memory.com/api/ranking_manage`, {
         year: this.api_data['year'],
         league_id: this.api_data['league']['id'],
         comment: this.comment,

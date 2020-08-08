@@ -98,10 +98,10 @@ export default {
     // 本番 http://sports-memory.com
     // 2つのHTTPのレスポンスを受けてからページがレンダリングされる
     const [game_data, game_highligt_data, daily_lineup_data, game_comment_data] = await Promise.all([
-      axios.get(`http://sports-memory.com/api/game/${params.team}/${params.date}`),
-      axios.get(`http://sports-memory.com/api/game_highlight/${params.team}/${params.date}`),
-      axios.get(`http://sports-memory.com/api/daily_lineup_manage/${params.team}/${params.date}`),
-      axios.get(`http://sports-memory.com/api/game_comment/${params.team}/${params.date}`)
+      axios.get(`https://sports-memory.com/api/game/${params.team}/${params.date}`),
+      axios.get(`https://sports-memory.com/api/game_highlight/${params.team}/${params.date}`),
+      axios.get(`https://sports-memory.com/api/daily_lineup_manage/${params.team}/${params.date}`),
+      axios.get(`https://sports-memory.com/api/game_comment/${params.team}/${params.date}`)
     ]);
     return {
       game_data: game_data['data'],
@@ -164,7 +164,7 @@ export default {
       });
       // 開発 http://localhost:4000
       // 本番 http://sports-memory.com
-      const { data } = await axios.post(`http://sports-memory.com/api/daily_lineup_manage`, {
+      const { data } = await axios.post(`https://sports-memory.com/api/daily_lineup_manage`, {
         date: this.daily_lineup_data['date'],
         team_id: this.daily_lineup_data['team']['id'],
         lineup: [
@@ -189,7 +189,7 @@ export default {
       });
       // 開発 http://localhost:4000
       // 本番 http://sports-memory.com
-      const { data } = await axios.post(`http://sports-memory.com/api/game_highlight`, {
+      const { data } = await axios.post(`https://sports-memory.com/api/game_highlight`, {
         date: this.game_highligt_data['date'],
         team_id: this.game_highligt_data['team']['id'],
         text: this.highligt_comment
@@ -205,7 +205,7 @@ export default {
       });
       // 開発 http://localhost:4000
       // 本番 http://sports-memory.com
-      const { data } = await axios.post(`http://sports-memory.com/api/game_comment`, {
+      const { data } = await axios.post(`https://sports-memory.com/api/game_comment`, {
         date: this.game_comment_data['date'],
         team_id: this.game_comment_data['team']['id'],
         text: this.game_comment
