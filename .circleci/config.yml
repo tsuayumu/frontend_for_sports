@@ -19,11 +19,11 @@ jobs:
       - run:
           name: Docker Build
           command: |
-            docker build . -t gcr.io/${GOOGLE_PROJECT_ID}/nuxt-app:${CIRCLE_SHA1}
+            docker build . -t gcr.io/${GOOGLE_PROJECT_ID}/frontend_sports:${CIRCLE_SHA1}
       - run:
           name: Docker Push
           command: |
-            docker push gcr.io/${GOOGLE_PROJECT_ID}/nuxt-app:${CIRCLE_SHA1}
+            docker push gcr.io/${GOOGLE_PROJECT_ID}/frontend_sports:${CIRCLE_SHA1}
 workflows:
   build:
     jobs:
