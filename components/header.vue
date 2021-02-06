@@ -7,22 +7,23 @@
       </button>
       <div id="header-list" class="collapse navbar-collapse">
         <ul class="navbar-nav">
-          <!-- 開幕スタメン
-          <li class="nav-item"><a href="/opening_starting_lineup/giants/2020" class="nav-link">Giants</a></li>
-          <li class="nav-item"><a href="/opening_starting_lineup/tigers/2020" class="nav-link">Tigers</a></li>
-          <li class="nav-item"><a href="/opening_starting_lineup/carp/2020" class="nav-link">Carp</a></li>
-          <li class="nav-item"><a href="/opening_starting_lineup/baystars/2020" class="nav-link">Baystars</a></li>
-          <li class="nav-item"><a href="/opening_starting_lineup/dragons/2020" class="nav-link">Dragons</a></li>
-          <li class="nav-item"><a href="/opening_starting_lineup/swallows/2020" class="nav-link">Swallows</a></li>
-          <li class="nav-item"><a href="/opening_starting_lineup/hawks/2020" class="nav-link">Hawks</a></li>
-          <li class="nav-item"><a href="/opening_starting_lineup/fighters/2020" class="nav-link">Fighters</a></li>
-          <li class="nav-item"><a href="/opening_starting_lineup/buffaloes/2020" class="nav-link">Buffaloes</a></li>
-          <li class="nav-item"><a href="/opening_starting_lineup/marines/2020" class="nav-link">Marines</a></li>
-          <li class="nav-item"><a href="/opening_starting_lineup/eagles/2020" class="nav-link">Eagles</a></li>
-          <li class="nav-item"><a href="/opening_starting_lineup/lions/2020" class="nav-link">Lions</a></li>
-          <li class="nav-item"><a href="/opening_starting_lineup/japan/2020" class="nav-link">Japan</a></li>
-          -->
+          <!-- 開幕スタメン -->
+          <li class="nav-item"><a href="/opening_starting_lineup/giants/2021" class="nav-link">Giants</a></li>
+          <li class="nav-item"><a href="/opening_starting_lineup/tigers/2021" class="nav-link">Tigers</a></li>
+          <li class="nav-item"><a href="/opening_starting_lineup/carp/2021" class="nav-link">Carp</a></li>
+          <li class="nav-item"><a href="/opening_starting_lineup/baystars/2021" class="nav-link">Baystars</a></li>
+          <li class="nav-item"><a href="/opening_starting_lineup/dragons/2021" class="nav-link">Dragons</a></li>
+          <li class="nav-item"><a href="/opening_starting_lineup/swallows/2021" class="nav-link">Swallows</a></li>
+          <li class="nav-item"><a href="/opening_starting_lineup/hawks/2021" class="nav-link">Hawks</a></li>
+          <li class="nav-item"><a href="/opening_starting_lineup/fighters/2021" class="nav-link">Fighters</a></li>
+          <li class="nav-item"><a href="/opening_starting_lineup/buffaloes/2021" class="nav-link">Buffaloes</a></li>
+          <li class="nav-item"><a href="/opening_starting_lineup/marines/2021" class="nav-link">Marines</a></li>
+          <li class="nav-item"><a href="/opening_starting_lineup/eagles/2021" class="nav-link">Eagles</a></li>
+          <li class="nav-item"><a href="/opening_starting_lineup/lions/2021" class="nav-link">Lions</a></li>
+          <li class="nav-item"><a href="/opening_starting_lineup/japan/2021" class="nav-link">Japan</a></li>
+         
 
+          <!-- 試合実況
           <li class="nav-item"><a :href="header_href('giants')" class="nav-link">Giants</a></li>
           <li class="nav-item"><a :href="header_href('tigers')" class="nav-link">Tigers</a></li>
           <li class="nav-item"><a :href="header_href('carp')" class="nav-link">Carp</a></li>
@@ -34,7 +35,7 @@
           <li class="nav-item"><a :href="header_href('buffaloes')" class="nav-link">Buffaloes</a></li>
           <li class="nav-item"><a :href="header_href('marines')" class="nav-link">Marines</a></li>
           <li class="nav-item"><a :href="header_href('eagles')" class="nav-link">Eagles</a></li>
-          <li class="nav-item"><a :href="header_href('lions')" class="nav-link">Lions</a></li>
+          <li class="nav-item"><a :href="header_href('lions')" class="nav-link">Lions</a></li> -->
         </ul>
       </div>
     </nav>
