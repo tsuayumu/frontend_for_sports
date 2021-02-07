@@ -31,6 +31,7 @@
           <input type='text' v-model="comment">
         </div>
         <input type='submit' value='投稿'>
+        <p class="white text-center"><span class="font-weight-bold">必ず</span>コメントがもらえます！</p>
       </form>
     </div>
 
