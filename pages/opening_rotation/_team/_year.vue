@@ -113,7 +113,7 @@ import axios from 'axios'
 
 export default {
   async asyncData ({ params }) {
-    const { data } = await axios.get(`https://sports-memory.com/api/rotation_manage/${params.team}/${params.year}`)
+    const { data } = await axios.get(`http://web/api/rotation_manage/${params.team}/${params.year}`)
     return { api_data: data }
   },
   data() {
@@ -128,7 +128,7 @@ export default {
         'event_label': 'Rotation',
         'value': 1
       });
-      const { data } = await axios.post(`https://sports-memory.com/api/rotation_manage`, {
+      const { data } = await axios.post(`http://sports-memory.com/api/rotation_manage`, {
         year: this.api_data['year'],
         team_id: this.api_data['team']['id'],
         rotation: [
