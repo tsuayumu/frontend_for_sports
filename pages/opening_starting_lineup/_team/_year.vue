@@ -35,6 +35,12 @@
     </div>
 
     <div class="container">
+      <p class="white text-center" v-if="error_message">
+        {{ error_message }}
+      </p>
+    </div>
+
+    <div class="container">
       <h5 class="text-dark bg-light my-3 p-1">投稿一覧</h5>
       <div v-for="lineup_manage in api_data['lineup_manages']" class="bbs-contet mb-3">
         <h6 class="text-center white manage-tit">
@@ -127,14 +133,19 @@ export default {
         ],
         comment: this.comment
       })
-      this.api_data['lineup_manages'].unshift(
-        {
-          id: data['id'],
-          lineups: data['lineups'],
-          comment: data['comment'],
-          user_comments: []
-        }
-      )
+
+      if(data['error_message'] == 'すでに登録済みです') {
+        this.error_message = 'ご登録ありがとうございます、すでに登録済みの打順でしたmm'
+      } else {
+        this.api_data['lineup_manages'].unshift(
+          {
+            id: data['id'],
+            lineups: data['lineups'],
+            comment: data['comment'],
+            user_comments: []
+          }
+        )
+      }
       this.is_create_lineup = false
     },
     async create_user_comment (lineup_manage_id) {
