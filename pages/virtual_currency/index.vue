@@ -2,6 +2,7 @@
   <div class="container text-center">
     <h1>仮想通貨Twitterランキング</h1>
     <section class=''>
+      <button v-on:click="sort_rate()">並び替え</button>
       <div class="text-dark">
         <table border="0" width="100%">
           <tr style="text-align: center">
@@ -51,6 +52,9 @@ export default {
   data() {
   },
   methods: {
+    sort_rate: function () {
+      this.api_data['virtual_currencys'].sort('rate')
+    }
   }
 }
 </script>
