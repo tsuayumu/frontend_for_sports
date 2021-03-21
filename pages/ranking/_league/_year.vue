@@ -62,7 +62,7 @@ import axios from 'axios'
 
 export default {
   async asyncData ({ params }) {
-    // 開発 http://sports-web
+    // 開発 http://web
     // 本番 http://sports-memory.com
     const { data } = await axios.get(`https://sports-memory.com/api/ranking/${params.league}/${params.year}`)
     return { api_data: data }
