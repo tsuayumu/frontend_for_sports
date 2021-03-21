@@ -13,10 +13,26 @@
           </tr>
           <tr v-for="virtual_currency in api_data['virtual_currencys']" style="text-align: center">
             <td>{{ virtual_currency['name'] }}</td>
-            <td v-if ="virtual_currency['tweet_infos'].length != 0">{{ virtual_currency['tweet_infos'][0]['count'] }}</td>
-            <td v-if ="virtual_currency['tweet_infos'].length != 0">{{ virtual_currency['tweet_infos'][1]['count'] }}</td>
-            <td v-if ="virtual_currency['tweet_infos'].length != 0">{{ virtual_currency['tweet_infos'][2]['count'] }}</td>
-            <td v-if ="virtual_currency['tweet_infos'].length != 0">{{ virtual_currency['tweet_infos'][3]['count'] }}</td>
+            <td v-if ="virtual_currency['tweet_infos'].length != 0">
+              <nuxt-link :to="{ name: 'virtual_currency_tweet_word-id', params: { id: virtual_currency['tweet_infos'][0]['id'] } }">
+                {{ virtual_currency['tweet_infos'][0]['count'] }}
+              </nuxt-link>
+            </td>
+            <td v-if ="virtual_currency['tweet_infos'].length != 0">
+              <nuxt-link :to="{ name: 'virtual_currency_tweet_word-id', params: { id: virtual_currency['tweet_infos'][1]['id'] } }">
+                {{ virtual_currency['tweet_infos'][1]['count'] }}
+              </nuxt-link>
+            </td>
+            <td v-if ="virtual_currency['tweet_infos'].length != 0">
+              <nuxt-link :to="{ name: 'virtual_currency_tweet_word-id', params: { id: virtual_currency['tweet_infos'][2]['id'] } }">
+                {{ virtual_currency['tweet_infos'][2]['count'] }}
+              </nuxt-link>
+            </td>
+            <td v-if ="virtual_currency['tweet_infos'].length != 0">
+              <nuxt-link :to="{ name: 'virtual_currency_tweet_word-id', params: { id: virtual_currency['tweet_infos'][3]['id'] } }">
+                {{ virtual_currency['tweet_infos'][3]['count'] }}
+              </nuxt-link>
+            </td>
           </tr>
         </table>
       </div>
