@@ -1,10 +1,14 @@
 <template>
   <div style="background-color: #000;" class="py-2">
-    <h1 class="text-center white">みんなのツイート</h1>
+    <h1 class="text-center white">{{ api_data['title'] }}</h1>
     <div class="container">
       <div class="container" style="white-space: pre-line;">
         <div v-for="tweet in api_data['tweet_word']" class="bbs-contet mb-3">
-          <p class="white text-left balloon1-left text-left">{{tweet["text"]}}</p>
+          <div class="white text-left balloon1-left text-left"><span class="font-weight-bold">{{tweet["name"]}}</span>（{{tweet["followers_count"]}}人）
+            {{tweet["text"]}}
+
+            ♡ {{tweet["favorite_count"]}}　{{tweet["tweeted_at"]}}
+          </div>
         </div>
       </div>
     </div>
